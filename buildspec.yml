@@ -1,0 +1,34 @@
+version: 0.2
+<<<<<<< HEAD
+=======
+
+>>>>>>> fe748eda8d4150eda968f87fd463a3465c76cef6
+phases:
+  install:
+    runtime-versions:
+      docker: 20
+  pre_build:
+    commands:
+      - echo "Installing Terraform..."
+      - curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+      - sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+      - sudo apt-get update && sudo apt-get install -y terraform
+      - terraform --version
+  build:
+    commands:
+      - echo "Initializing Terraform..."
+      - terraform init
+<<<<<<< HEAD
+      - terraform apply -auto-approve
+  post_build:
+    commands:
+      - echo "Terraform Deployment Completed!"
+=======
+      - echo "Planning Terraform Deployment..."
+      - terraform plan -out=tfplan
+      - echo "Applying Terraform Configuration..."
+      - terraform apply -auto-approve
+  post_build:
+    commands:
+      - echo "Terraform Deployment Completed!"
+>>>>>>> fe748eda8d4150eda968f87fd463a3465c76cef6
